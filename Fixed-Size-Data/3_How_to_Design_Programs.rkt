@@ -65,3 +65,37 @@
 (check-expect (tock 78) 81)
 
 (define (tock cw)
+
+
+;41
+;41
+(define CAR
+  (overlay/align/offset "middle" "bottom"
+  BOTH-WHEELS
+   0 (* WHEEL-RADIUS -1)
+   CHASSIS))
+
+(define tree
+  (underlay/xy (circle 10 "solid" "green")
+               9 15
+               (rectangle 2 20 "solid" "brown")))
+
+(define BACKGROUND (overlay tree (empty-scene 200 100)))
+(define Y-CAR 50)
+
+; WorldState -> Image
+; places the car into the BACKGROUND scene,
+; according to the given world state
+(define (render cw)
+  (place-image CAR cw Y-CAR BACKGROUND))
+
+(check-expect (last-pixel? 100) #false)
+(check-expect (last-pixel? 250) #true)
+(define (last-pixel? cw)
+  (< (image-width BACKGROUND) cw))
+
+(define (main n)
+  (big-bang n
+    [on-tick tock]
+    [to-draw render]
+    [stop-when last-pixel?]))
