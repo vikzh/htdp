@@ -40,11 +40,11 @@
 (define WHEEL-RADIUS 10)
 (define WHEEL-DISTANCE (* WHEEL-RADIUS 2))  
 
-(define WHEEL                                                         
-  (circle WHEEL-RADIUS "solid" "black"))    
-(define SPACE                             
+(define WHEEL
+  (circle WHEEL-RADIUS "solid" "black"))
+(define SPACE
   (rectangle WHEEL-DISTANCE (/ WHEEL-RADIUS 8) "solid" "white"))
-(define BOTH-WHEELS                       
+(define BOTH-WHEELS
   (beside WHEEL SPACE WHEEL))
 
 (define CHASSIS
@@ -56,3 +56,12 @@
   BOTH-WHEELS
    0 (* WHEEL-RADIUS -1)
    CHASSIS)
+
+;40
+; WorldState -> WorldState 
+; moves the car by 3 pixels for every clock tick
+; examples:
+(check-expect (tock 20) 23)
+(check-expect (tock 78) 81)
+
+(define (tock cw)
