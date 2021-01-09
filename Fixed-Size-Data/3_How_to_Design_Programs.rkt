@@ -67,8 +67,7 @@
 (define (tock cw)
 
 
-;41
-;41
+;41-44
 (define CAR
   (overlay/align/offset "middle" "bottom"
   BOTH-WHEELS
@@ -94,8 +93,14 @@
 (define (last-pixel? cw)
   (< (image-width BACKGROUND) cw))
 
+(define (hyper x-position-of-car x-mouse y-mouse  me)
+  (cond
+    [(string=? "button-down" me) x-mouse]
+    [else x-position-of-car]))
+
 (define (main n)
   (big-bang n
     [on-tick tock]
     [to-draw render]
-    [stop-when last-pixel?]))
+    [stop-when last-pixel?]
+    [on-mouse hyper]))
