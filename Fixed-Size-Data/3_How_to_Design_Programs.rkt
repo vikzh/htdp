@@ -104,3 +104,23 @@
     [to-draw render]
     [stop-when last-pixel?]
     [on-mouse hyper]))
+
+;45-46
+(define cat1 .)
+(define cat2 .)
+(define WORLD-WIDTH 300)
+(define WORLD-HEIGHT 300)
+(define BACKGROUND (empty-scene WORLD-WIDTH WORLD-HEIGHT))
+
+(define (render x-cor)
+  (cond
+    [(odd? x-cor) (place-image cat1 x-cor (/ WORLD-HEIGHT 2) BACKGROUND)]
+    [else (place-image cat2 x-cor (/ WORLD-HEIGHT 2) BACKGROUND)]))
+
+(define (tock cw)
+  (+ cw 3))
+
+(define (main n)
+  (big-bang n
+    [on-tick tock]
+    [to-draw render]))
