@@ -1,6 +1,12 @@
-;48
-(define (reward s)
+;50
+; TrafficLight -> TrafficLight
+; yields the next state given current state s
+(check-expect (traffic-light-next "red") "green")
+(check-expect (traffic-light-next "green") "yellow")
+(check-expect (traffic-light-next "yellow") "red")
+(define (traffic-light-next s)
   (cond
-    [(<= 0 s 10) "bronze"]
-    [(and (< 10 s) (<= s 20)) "silver"]
-    [else "gold"]))
+    [(string=? "red" s) "green"]
+    [(string=? "green" s) "yellow"]
+    [(string=? "yellow" s) "red"]))
+
